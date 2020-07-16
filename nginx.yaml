@@ -12,14 +12,13 @@ spec:
   - port: 80
     name: http
     nodePort : 80
-    targetPort: 80
   - port: 443
     nodePort : 443
     name: https
-  # - port: 22
-  #   nodePort: 22
-  #   targetPort: 22
-  #   name: ssh
+  - port: 22
+    nodePort: 22
+    targetPort: 22
+    name: ssh
 
 ---
 

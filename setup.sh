@@ -23,7 +23,7 @@ echo "Building images..."
 docker build -t nginx_img ./nginx/
 # docker build -t service_test ./srcs/test
 # docker build -t service_ftps --build-arg IP=${IP} ./srcs/ftps
-# docker build -t service_mysql ./srcs/mysql --build-arg IP=${IP}
+docker build -t mysql_img ./mysql/
 # docker build -t service_wordpress ./srcs/wordpress --build-arg IP=${IP}
 # docker build -t service_phpmyadmin ./srcs/phpmyadmin --build-arg IP=${IP}
 # docker build -t service_influxdb ./srcs/influxdb
@@ -36,6 +36,7 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.3/manife
 kubectl apply -f config.yaml
 echo "Creating pods and services..."
 kubectl create -f nginx.yaml
+kubectl create -f mysql.yaml
 
 # echo "Opening the network in your browser"
 # open http://$IP

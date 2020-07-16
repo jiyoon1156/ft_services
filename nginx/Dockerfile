@@ -17,7 +17,7 @@ RUN mkdir -p /etc/nginx/ssl
 RUN openssl req -x509 -nodes -days 365 -subj "/C=KR/ST=Korea/L=Seoul/O=innoaca/OU=42seoul/CN=jhur" -newkey rsa:2048 -keyout /etc/ssl/nginx-selfsigned.key -out /etc/ssl/nginx-selfsigned.crt; 
 
 #SSH
-RUN apk add --no-cache openssh
+RUN apk add --no-cache openssh \
 && sed 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' -i /etc/ssh/sshd_config \
 && echo 'root:0000' | chpasswd \
 && ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa \
