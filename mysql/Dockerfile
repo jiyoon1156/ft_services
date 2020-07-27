@@ -1,6 +1,5 @@
 FROM alpine:latest
-
-# RUN apk add telegraf --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted --no-cache
+ARG IP
 
 # Installation
 RUN apk update \
@@ -8,18 +7,21 @@ RUN apk update \
 && rm -rf /var/cache/apk/*
 
 # Copy initialisation script
-COPY ./init_docker.sh .
-COPY ./init_mysql.sh .
-# COPY wordpress.sql .
+COPY ./my.cnf /etc/mysql/
+#COPY ./my.cnf /etc/my.cnf.d/ ????
+COPY ./init_docker.sh /tmp/
+COPY ./init_mysql.sh /tmp/
+COPY wordpress.sql /tmp/
 
 # Add permission
 RUN chmod +x init_docker.sh
 RUN chmod +x init_mysql.sh
-
-# RUN mkdir -p /etc/telegraf
-# COPY ./telegraf.conf /etc/telegraf/telegraf.conf
-
-COPY init_docker.sh /init_docker.sh
 RUN chmod +x init_docker.sh
+
+RUN echo $IP > ip.txt
+RUN export IP=$(cat /ip.txt)
+RUN sed -i "s/MINIKUBE_IP/$IP/g" /wordpress.sql
+
 EXPOSE 3306
-CMD ./init_docker.sh
+
+CMD sh /tmp/init_docker.sh

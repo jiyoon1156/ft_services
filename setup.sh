@@ -24,7 +24,7 @@ docker build -t nginx_img ./nginx/
 # docker build -t service_test ./srcs/test
 # docker build -t service_ftps --build-arg IP=${IP} ./srcs/ftps
 docker build -t mysql_img ./mysql/
-# docker build -t service_wordpress ./srcs/wordpress --build-arg IP=${IP}
+docker build -t wp_img ./wordpress --build-arg IP=${IP}
 docker build -t pma_img ./phpmyadmin --build-arg IP=${IP}
 # docker build -t service_influxdb ./srcs/influxdb
 # docker build -t service_grafana ./srcs/grafana
@@ -39,7 +39,10 @@ echo "Creating pods and services..."
 kubectl create -f nginx.yaml
 kubectl create -f mysql.yaml
 kubectl create -f phpmyadmin.yaml
+kubectl create -f wordpress.yaml
 
 # echo "Opening the network in your browser"
 # open http://$IP
 minikube service list
+IP=$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed -n 2p)
+printf "Minikube IP: ${IP}"

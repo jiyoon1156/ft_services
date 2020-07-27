@@ -1,4 +1,4 @@
-  #!/bin/ash
+  #!/bin/sh
 nohup ./init_mysql.sh > /dev/null 2>&1 &
 
 sed -i 's/skip-networking/#skip-networking/g' /etc/my.cnf.d/mariadb-server.cnf

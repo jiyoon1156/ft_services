@@ -22,6 +22,7 @@ RUN apk add --no-cache openssh \
 && echo 'root:0000' | chpasswd \
 && ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa \
 && ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa \
+&& echo "Port 30022" >> /etc/ssh/sshd_config \
 && mkdir -p /var/run/sshd
 
 # 22 port is being already used in MAC
