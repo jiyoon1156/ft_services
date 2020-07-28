@@ -27,6 +27,7 @@ docker build -t mysql_img ./mysql/ --build-arg IP=${IP}
 docker build -t wp_img ./wordpress --build-arg IP=${IP}
 docker build -t pma_img ./phpmyadmin --build-arg IP=${IP}
 docker build -t influxdb_img ./influxdb
+docker build -t telegraf_img ./telegraf
 docker build -t grafana_img ./grafana
 
 #metallb
@@ -41,6 +42,7 @@ kubectl create -f mysql.yaml
 kubectl create -f phpmyadmin.yaml
 kubectl create -f wordpress.yaml
 kubectl create -f influxdb.yaml
+kubectl create -f telegraf.yaml
 kubectl create -f grafana.yaml
 
 # echo "Opening the network in your browser"
