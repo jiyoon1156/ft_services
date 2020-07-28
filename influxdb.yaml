@@ -1,0 +1,98 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: influxdb-service
+    labels:
+        app: influxdb
+spec:
+    selector:
+        app: influxdb
+    type: ClusterIP
+    ports:
+        - port: 8086
+          name: influxdb-port
+          targetPort: 8086
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: influxdb-pv
+    labels:
+        type: local
+spec:
+    storageClassName: influxdb-db
+    accessModes:
+        - ReadWriteMany
+    capacity:
+        storage: 1Gi
+    hostPath:
+        path: /var/lib/influxdb/
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: influxdb-secret
+  labels:
+    app: influxdb
+type: Opaque
+stringData:
+  INFLUXDB_CONFIG_PATH: /etc/influxdb.conf
+  INFLUXDB_ADMIN_USER: admin
+  INFLUXDB_ADMIN_PASSWORD: admin
+  INFLUXDB_DB: telegraf
+  INFLUXDB_USER: admin
+  INFLUXDB_USER_PASSWORD: admin
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: influxdb-pvc
+spec:
+    storageClassName: influxdb-db
+    accessModes:
+        - ReadWriteMany
+    resources:
+        requests:
+            storage: 1Gi
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: influxdb-deployment
+    labels:
+        app: influxdb
+spec:
+    selector:
+        matchLabels:
+            app: influxdb
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                app: influxdb
+        spec:
+            containers:
+                - name: influxdb-container
+                  image: influxdb_img
+                  imagePullPolicy: Never
+                  ports:
+                      - containerPort: 8086
+                        name: influxdb-port
+                  volumeMounts:
+                      - name: influxdb-pv
+                        mountPath: /var/lib/influxdb/
+                  envFrom:
+                    - secretRef:
+                        name: influxdb-secret
+            volumes:
+                - name: influxdb-pv
+                  persistentVolumeClaim:
+                      claimName: influxdb-pvc

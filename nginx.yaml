@@ -42,6 +42,19 @@ spec:
       - name: nginx
         image: nginx_img
         imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+          name: http
+        - containerPort: 443
+          name: https
+        - containerPort: 22
+          name: ssh
+          livenessProbe: # 만약 kubectl exec deploy/nginx -- pkill sshd로 sshd 프로세스를 죽이면 컨테이너 재시작
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 5
+          tcpSocket:
+            port: 22
 
 
   
