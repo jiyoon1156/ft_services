@@ -24,7 +24,7 @@ metadata:
     app: mysql
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
       storage: 2Gi
@@ -54,7 +54,7 @@ spec:
           name: mysql
         volumeMounts:
         - name: mysql
-          mountPath: /var/lib/mysql
+          mountPath: /var/lib/mysql/
       volumes:
       - name: mysql
         persistentVolumeClaim:

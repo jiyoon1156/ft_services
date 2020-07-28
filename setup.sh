@@ -23,7 +23,7 @@ echo "Building images..."
 docker build -t nginx_img ./nginx/
 # docker build -t service_test ./srcs/test
 # docker build -t service_ftps --build-arg IP=${IP} ./srcs/ftps
-docker build -t mysql_img ./mysql/
+docker build -t mysql_img ./mysql/ --build-arg IP=${IP}
 docker build -t wp_img ./wordpress --build-arg IP=${IP}
 docker build -t pma_img ./phpmyadmin --build-arg IP=${IP}
 # docker build -t service_influxdb ./srcs/influxdb

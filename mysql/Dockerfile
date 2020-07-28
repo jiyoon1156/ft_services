@@ -3,12 +3,12 @@ ARG IP
 
 # Installation
 RUN apk update \
-&& apk add mariadb mariadb-client && apk add --no-cache --upgrade bash \
-&& rm -rf /var/cache/apk/*
+&& apk add mysql mysql-client && rm -rf /var/cache/apk/*
 
+RUN mkdir -p /run/mysqld
 # Copy initialisation script
-COPY ./my.cnf /etc/mysql/
-#COPY ./my.cnf /etc/my.cnf.d/ ????
+COPY ./mariadb-server.cnf /etc/my.cnf.d/
+# COPY ./mariadb-server.cnf /etc/mysql/
 COPY ./init_docker.sh /tmp/
 COPY ./init_mysql.sh /tmp/
 COPY ./wordpress.sql /tmp/
@@ -20,7 +20,7 @@ COPY ./wordpress.sql /tmp/
 
 RUN echo $IP > ip.txt
 RUN export IP=$(cat /ip.txt)
-RUN sed -i "s/MINIKUBE_IP/$IP/g" /tmp/wordpress.sql
+RUN sed -i "s/192.168.99.120/$IP/g" /tmp/wordpress.sql
 
 EXPOSE 3306
 
