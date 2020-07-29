@@ -22,7 +22,7 @@ printf "Minikube IP: ${IP}"
 echo "Building images..."
 docker build -t nginx_img ./nginx/
 # docker build -t service_test ./srcs/test
-# docker build -t service_ftps --build-arg IP=${IP} ./srcs/ftps
+docker build -t ftps_img ./ftps --build-arg IP=${IP}
 docker build -t mysql_img ./mysql/ --build-arg IP=${IP}
 docker build -t wp_img ./wordpress --build-arg IP=${IP}
 docker build -t pma_img ./phpmyadmin --build-arg IP=${IP}
@@ -43,7 +43,8 @@ kubectl create -f phpmyadmin.yaml
 kubectl create -f wordpress.yaml
 kubectl create -f influxdb.yaml
 kubectl create -f telegraf.yaml
-# kubectl create -f grafana.yaml
+kubectl create -f grafana.yaml
+kubectl create -f ftps.yaml
 
 # echo "Opening the network in your browser"
 # open http://$IP
