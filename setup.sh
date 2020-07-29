@@ -20,7 +20,7 @@ IP=$(kubectl get node -o=custom-columns='DATA:status.addresses[0].address' | sed
 printf "Minikube IP: ${IP}"
 
 echo "Building images..."
-docker build -t nginx_img ./nginx
+docker build -t nginx_img ./srcs/nginx
 docker build -t ftps_img ./srcs/ftps --build-arg IP=${IP}
 docker build -t mysql_img ./srcs/mysql --build-arg IP=${IP}
 docker build -t wp_img ./srcs/wordpress --build-arg IP=${IP}
