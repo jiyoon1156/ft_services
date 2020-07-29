@@ -43,7 +43,7 @@ kubectl create -f phpmyadmin.yaml
 kubectl create -f wordpress.yaml
 kubectl create -f influxdb.yaml
 kubectl create -f telegraf.yaml
-kubectl create -f grafana.yaml
+# kubectl create -f grafana.yaml
 
 # echo "Opening the network in your browser"
 # open http://$IP
