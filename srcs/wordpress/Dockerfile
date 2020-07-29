@@ -1,4 +1,4 @@
-FROM alpine
+FROM alpine:latest
 ARG IP
 
 RUN apk update
