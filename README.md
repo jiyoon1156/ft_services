@@ -36,7 +36,7 @@ docker run -it -p 80:80 -p 443:443 nginx
 
 ## 쿠버네티스 개념
 
-**오브젝트** : 
+**오브젝트** :
 
 - Pod, Service, namespace, Volume, ConfigMap 등
 - 사용자는 이 오브젝트들을 조건에 맞게 생성하여 일을 시킨다.
@@ -46,7 +46,7 @@ docker run -it -p 80:80 -p 443:443 nginx
 
     각 Pod와 Service의 연결을 위해 Label 설정도 해주고 Pod에서 실행할 flask 웹서버 컨테이너의 조건을 지정해 주기도 한다.
 
-**컨트롤러** : 
+**컨트롤러** :
 
 - Replicaset, Deployment, Job, 등
 - 이러한 오브젝트를 관리하기 쉽게하는 역할을 한다.
@@ -287,7 +287,7 @@ kubectl get pods
 kubectl logs mysql-6c79475bd5-bzblc
 ```
 
-→해결:  대쉬가 잘못되어있었음! 대부분 문법에러 
+→해결:  대쉬가 잘못되어있었음! 대부분 문법에러
 
 mysql wordpress -u root --skip-password < /tmp/wordpress.sql (맞는거)
 
@@ -349,7 +349,7 @@ hostname: sethostname: Operation not permitted
 ‘-Y 2’ : anonymous session 을 포함한 SSL/TLS security mechanisms 를 사용하지 않는 접속을 거부 “—with-tls 옵션으로 컴파일 되어야 하고
 
 - passive active
-
+(/Users/jiyoonhur/Downloads/IMG_5984.HEIC)
 [FTP 액티브(Active)와 패시브(Passive) 차이점 - 익스트림 매뉴얼](https://extrememanual.net/3504)
 
 호스트 미니쿠베 ip, 포트 21 로 빠른 연결
