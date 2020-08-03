@@ -348,8 +348,9 @@ hostname: sethostname: Operation not permitted
 
 ‘-Y 2’ : anonymous session 을 포함한 SSL/TLS security mechanisms 를 사용하지 않는 접속을 거부 “—with-tls 옵션으로 컴파일 되어야 하고
 
-- passive active
-(/Users/jiyoonhur/Downloads/IMG_5984.HEIC)
+- passive mode vs active mode
+![IMG_5984](https://user-images.githubusercontent.com/60052127/89193321-c9028e80-d5e0-11ea-95a4-6aee5288bbee.JPEG)
+- ftp yaml 과 dockerfile 에서 포트 30020 열어주는 것은 그림에서 포트 3267 열어주는 것과 같음.
 [FTP 액티브(Active)와 패시브(Passive) 차이점 - 익스트림 매뉴얼](https://extrememanual.net/3504)
 
 호스트 미니쿠베 ip, 포트 21 로 빠른 연결
