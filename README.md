@@ -1,5 +1,5 @@
-# ft_service
-### Minicube 설치
+# ft_services
+### Minikube 설치
 
 맥OS에서 가상화 지원 여부를 확인하려면, 아래 명령어를 터미널에서 실행한다.
 
